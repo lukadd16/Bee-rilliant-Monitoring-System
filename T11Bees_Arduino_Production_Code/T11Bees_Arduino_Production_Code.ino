@@ -55,8 +55,8 @@ void loop() {
    * Wait for the HX811 scale to be "ready" before taking readings.
    * If it fails, retry 10 times waiting 100ms between each try.
    */
-  if (scale.is_ready()) {
-    // Take the average of 10 readings from the load cells
+  if (scale.wait_ready_retry(10, 100)) {
+    // Take the average of 50 readings from the load cells
     weight = scale.get_units(50);
   } else {
     weight = -999;
